@@ -61,10 +61,10 @@ function preload(){
 
     //player
     PlayerWL = loadAnimation("images/Walk1L.png", "images/Walk2L.png","images/Walk3L.png","images/Walk4L.png","images/Walk5L.png")
-    PlayerWR = loadAnimation("images/Nwalk1.png", "images/Nwalk2.png","images/Nwalk3.png","images/Nwalk4.png","images/Nwalk5.png")
+    PlayerWR = loadAnimation("images/Walk1R.png", "images/Walk2R.png","images/Walk3R.png","images/Walk4R.png","images/Walk5R.png")
    // PlayerRR = loadAnimation("images/Run1.png","images/Run2.png","images/Run3.png")
    // PlayerRL = loadAnimation("images/Run1L.png","images/Run2L.png","images/Run3L.png")
-   PlayerRR = loadAnimation("images/Walk1L.png", "images/Walk2L.png","images/Walk3L.png","images/Walk4L.png","images/Walk5L.png")
+   PlayerRR = loadAnimation("images/Walk1R.png", "images/Walk2R.png","images/Walk3R.png","images/Walk4R.png","images/Walk5R.png")
    PlayerRL = loadAnimation("images/Walk1L.png", "images/Walk2L.png","images/Walk3L.png","images/Walk4L.png","images/Walk5L.png")
    PlayerRR.frameDelay = 1.5;
    PlayerRL.frameDelay = 1.5;
