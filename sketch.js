@@ -61,10 +61,10 @@ function preload(){
 
     //player
     PlayerWL = loadAnimation("images/Walk1L.png", "images/Walk2L.png","images/Walk3L.png","images/Walk4L.png","images/Walk5L.png")
-    PlayerWR = loadAnimation("images/Walk1R.png", "images/Walk2R.png","images/Walk3R.png","images/Walk4R.png","images/Walk5R.png")
+    PlayerWR = loadAnimation("images/Nwalk1.png", "images/Nwalk2.png","images/Nwalk3.png","images/Nwalk4.png","images/Nwalk5.png")
    // PlayerRR = loadAnimation("images/Run1.png","images/Run2.png","images/Run3.png")
    // PlayerRL = loadAnimation("images/Run1L.png","images/Run2L.png","images/Run3L.png")
-   PlayerRR = loadAnimation("images/Walk1R.png", "images/Walk2R.png","images/Walk3R.png","images/Walk4R.png","images/Walk5R.png")
+   PlayerRR = loadAnimation("images/Walk1L.png", "images/Walk2L.png","images/Walk3L.png","images/Walk4L.png","images/Walk5L.png")
    PlayerRL = loadAnimation("images/Walk1L.png", "images/Walk2L.png","images/Walk3L.png","images/Walk4L.png","images/Walk5L.png")
    PlayerRR.frameDelay = 1.5;
    PlayerRL.frameDelay = 1.5;
@@ -321,11 +321,11 @@ function setup(){
     moving1.addImage(PlatformI1)
     moving1.scale = 0.2
     moving1.velocityX = 4
-    moving2 = createSprite(800/2 + 7000, 700 - 20,20,20)
-    moving2.setCollider("rectangle", -10 , -360 ,580,50)
-    moving2.addImage(PlatformI2)
-    moving2.scale = 0.5
+    moving2 = createSprite(800/2 + 7000, 500,20,20)
+    moving2.addImage(PlatformI1 )
+    moving2.scale = 0.3
     moving2.velocityY = -3
+    moving2.debug = true
     //LVL2
     
 
@@ -391,12 +391,12 @@ function setup(){
     enemy1.setCollider("rectangle",0,555,170,175)
     
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++enemy2+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-enemy2 = createSprite(800/2 + 3250, 700/2-200)
+enemy2 = createSprite(3500, 320)
 enemy2.addAnimation("Enemy2R",Enemy2WR)
 enemy2.addAnimation("Enemy2L", Enemy2W)
 enemy2.setCollider("rectangle",0,100,400,1000)
 enemy2.scale = 0.15
-enemy2.velocityX = 4.5
+enemy2.velocityX = 3
 
 //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++enemy3+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     enemy3 = createSprite(800/2 + 4750, 700/2)
@@ -556,7 +556,7 @@ if (music2.isPlaying() === false && bruh === 1){
         //======================collide==================================
         npc1.collide(PG)
         npc2.collide(PG)
-        enemy2.collide(PG)
+      //  enemy2.collide(PG)
         enemy5.collide(PG)
         enemy6.collide(PG)
         enemy7.collide(PG)
@@ -580,7 +580,7 @@ if(player.y > 800-200 && level === 1){
 movebox.x = moving1.x
 
 if(player.isTouching(movebox)){
-   player.velocityX = moving1.velocityX*1.25
+   player.velocityX = moving1.velocityX*1.37
 }
 
 
@@ -750,16 +750,23 @@ if(player.isTouching(wrench2)){
 }
 
         //=======================moving 1===============================
-        moving1.bounceOff(bouncebox)
-        moving1.bounceOff(bouncebox2)
+        //moving1.bounceOff(bouncebox)
+        //moving1.bounceOff(bouncebox2)
+        if(moving1.x <2500){
+            moving1.velocityX = 3
+        }
+        else if(moving1.x > 3000){
+            moving1.velocityX = -3
+        }
 
         jumpboxM1.x = moving1.x
-
+    
         //======================moving2====================================
-        moving2.bounceOff(bounceboxM1)
-        if(moving2.y > 700){
-            moving2.velocityY = -3
-        }
+        //moving2.bounceOff(bounceboxM1)
+    
+        if(moving2.y < -40){
+            moving2.y = 1100
+            moving2.velocityY = -3        }
 
         jumpboxM2.y = moving2.y
 
@@ -767,7 +774,7 @@ if(player.isTouching(wrench2)){
         player.velocityY += 1
         npc1.velocityY += 1
         npc2.velocityY += 1
-        enemy2.velocityY += 1
+       
         enemy5.velocityY += 1
         enemy6.velocityY += 1
         enemy7.velocityY += 1
@@ -799,9 +806,22 @@ if(player.isTouching(wrench2)){
         npc2D.x = npc2.x
         npc2D.y = npc2.y -150
 
+        //console.log(moving2.y)
+
         //==================================== enemy2 ==============================================
-        enemy2.bounceOff(bounceboxE1)
-        enemy2.bounceOff(bounceboxE2)
+       // enemy2.bounceOff(bounceboxE1)
+        //enemy2.bounceOff(bounceboxE2)
+
+       
+
+
+       if(enemy2.x <=3300){
+        enemy2.velocityX = 3
+
+       }else if(enemy2.x >=3900){
+        enemy2.velocityX = -3
+       }
+      
 
         if(enemy2.velocityX > 0){
             enemy2.changeAnimation("Enemy2R",Enemy2WR)
@@ -810,19 +830,25 @@ if(player.isTouching(wrench2)){
         else if(enemy2.velocityX < 0){
             enemy2.changeAnimation("Enemy2L",Enemy2W)
         }
+
         
         
         //====================================enemy3================================================
        // enemy3.bounceOff(bounceboxE3)
         //enemy3.bounceOff(bounceboxE4)
 
-        if(enemy3.y > 700 ){
-            enemy3.velocityY = -enemy3.velocityY
+     
+        if(enemy3.y < 0 ){
+            enemy3.velocityY = 3
         }
-        else if(enemy3.y < 0 ){
-            enemy3.velocityY = -enemy3.velocityY
+        else if(enemy3.y > 800){
+            enemy3.velocityY = -3
         }
-
+      
+        if(enemy3.y > 1000 ){
+            enemy3.y = 500
+            enemy3.velocityY = -(enemy3.velocityY)
+        }
         if(enemy3.velocityY < 0){
             enemy3.changeAnimation("upE",Enemy3U)
         }
@@ -835,12 +861,24 @@ if(player.isTouching(wrench2)){
        // enemy4.bounceOff(bounceboxE5)
         //enemy4.bounceOff(bounceboxE6)
 
-        if(enemy4.y > 700 ){
+       /* if(enemy4.y > 700 ){
             enemy4.velocityY = -enemy4.velocityY
         }
         else if(enemy4.y < 0 ){
             enemy4.velocityY = -enemy4.velocityY
+        }*/
+        if(enemy4.y < 0 ){
+            enemy4.velocityY = 4
         }
+        else if(enemy4.y > 800){
+            enemy4.velocityY = -4
+        }
+ 
+        if(enemy4.y > 1000 ){
+            enemy4.y = 500
+            enemy4.velocityY = -(enemy4.velocityY)
+        }
+   
 
         if(enemy4.velocityY < 0){
             enemy4.changeAnimation("upE",Enemy3U)
@@ -1036,7 +1074,7 @@ if(death === false){
     }
     //more debug
     if(keyWentDown("0")){
-        console.log(player.y)
+        console.log(player.x)
     }
 
 
